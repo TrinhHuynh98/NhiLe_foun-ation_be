@@ -1,11 +1,15 @@
 FROM node:16-alpine3.11
 
-WORKDIR /NhiLe_foun-ation_be
+ENV PORT=4000
 
+WORKDIR /usr/src/app
+
+# Install dependencies
+COPY package.json /usr/src/app/
 RUN npm install
 
-COPY . /NhiLe_foun-ation_be
+# Copy source
+COPY . /usr/src/app
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+EXPOSE $PORT
+CMD [ "npm", "start" ]
