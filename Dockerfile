@@ -1,15 +1,14 @@
+# from base image node
 FROM node:16-alpine3.11
 
-ENV PORT=4000
-
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# Install dependencies
-COPY package.json /usr/src/app/
-RUN npm install
+# copy oter files as well
+COPY dist/api.bundle.js .
 
-# Copy source
-COPY . /usr/src/app
+#expose the port
+EXPOSE 4000
 
-EXPOSE $PORT
-CMD [ "npm", "start" ]
+# command to run when intantiate an image
+CMD ["node","api.bundle.js"]
